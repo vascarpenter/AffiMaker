@@ -10,7 +10,7 @@ import SWXMLHash
 
 let associateTag = "gikohadiary-22"
 let amazonAccessKey = "--replace your amazon access key--"
-let amazonSecretKey = // "--replace your amazon secret key--"
+let amazonSecretKey = "--replace your amazon secret key--"
 
 extension Date
 {
