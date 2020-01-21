@@ -71,16 +71,15 @@ AF.request(url).response { response in
     if let data = response.data
     {
         let xml = SWXMLHash.parse(String(data: data, encoding: .utf8)!)
-        let title = xml["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"]["Title"].element?.text
-        if title == nil
+        if let title = xml["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"]["Title"].element?.text
         {
-            let errmsg = xml["ItemLookupResponse"]["Items"]["Request"]["Errors"]["Error"]["Message"].element?.text
-            print("Error: \(errmsg!)")
+            let itemurl = xml["ItemLookupResponse"]["Items"]["Item"]["DetailPageURL"].element?.text
+            print("<a href=\"\(itemurl!)\">\(title)</a>")
         }
         else
         {
-            let itemurl = xml["ItemLookupResponse"]["Items"]["Item"]["DetailPageURL"].element?.text
-            print("<a href=\"\(itemurl!)\">\(title!)</a>")
+            let errmsg = xml["ItemLookupResponse"]["Items"]["Request"]["Errors"]["Error"]["Message"].element?.text
+            print("Error: \(errmsg!)")
         }
     }
 }
